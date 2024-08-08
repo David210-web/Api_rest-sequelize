@@ -63,10 +63,21 @@ const deleteProject = async (req, res) => {
   }
 };
 
+const getProjectTasks = async(req,res)=>{
+  try{
+    const { id } = req.params;
+    const tasks = await Task.findAll({ where: { idProyecto: id } });
+    res.json(tasks);
+  }catch(err){
+    res.status(500).json({ message: err.message });
+  }
+}
+
 module.exports = {
   getProjects,
   getProject,
   createProject,
   updateProject,
   deleteProject,
+  getProjectTasks
 };
